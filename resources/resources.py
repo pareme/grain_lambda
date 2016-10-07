@@ -3,11 +3,12 @@ from pymongo import errors
 from bson.json_util import dumps
 
 
-def categories_handler(event, context):
+def resources_handler(event, context):
     try:
         client = MongoClient('localhost', 27017)
         db = client['grain']
-        collection = db['categories']
+        collection = db['resources']
+
         r = collection.find()
         l = list(r)
 
@@ -16,4 +17,3 @@ def categories_handler(event, context):
         return "Cannot connect to database host: %s" % e
     except errors.CollectionInvalid, e:
         return "Invalid collection: %s" % e
-
